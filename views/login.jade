@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+    form#loginForm
+
+      p 用户登录5000
+      p User Phone:
+      input(type='text',name='phone')
+      p Password:
+      input(type='text',name='password')
+      br
+      input#login(type='button',value='登录')
+      br
+    a(href='/registerpage', title='注册') 注册
+
+    script(src="/javascripts/login.js") 

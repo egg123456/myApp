@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  each item, i in rows
+    li #{item.name}: #{i}
+
+  button#btn click
+
+  script(src="/javascripts/index.js") 
