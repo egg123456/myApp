@@ -34,7 +34,8 @@ app.use(
     path: [
       /^\/users/, 
       /^\/javascripts\/.*/, 
-      /^\/stylesheets\//, 
+      /^\/stylesheets\//,
+      /^\/images\/.*/,
       /^\/builds\//, 
       /^\/build\//,
       /\/view\/.*/,
@@ -46,7 +47,11 @@ app.use(
   }))
 console.log(expressJWT, 'expressJWTexpressJWT');
 app.use(function (err, req, res, next) {
-  console.log('UnauthorizedError', err);
+  console.log('UnauthorizedError', err.name, err);
+  if (err.name === 'TokenExpiredError') {
+    // 处理JWT过期的情况
+    return res.status(401).json({ message: 'Token expired' });
+  }
   if (err.name === 'UnauthorizedError') {
     res.status(401).render('login', { title: 'login' })
   } else {
@@ -88,14 +93,14 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
 
 module.exports = app;

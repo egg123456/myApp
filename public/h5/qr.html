@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img id="my-image-element" src="../images/one.png" alt="qrCode" crossorigin="anonymous">
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <script>
+    function decodeQR(image) {
+      console.log(image, 'image')
+      var width = image.naturalWidth;
+      var height = image.naturalHeight;
+      var canvas = document.getElementById('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(image, 0, 0);
+      var imageData = ctx.getImageData(0, 0, width, height);
+      var code = jsQR(imageData.data, width, height);
+      return code;
+    }
+ 
+    // 使用方法：
+    // 假设你有一个image元素或者canvas元素
+    var image = document.getElementById('my-image-element');
+    var code = decodeQR(image);
+    if (code) {
+      console.log(code.data); // 这里是二维码包含的数据
+    } else {
+      console.log('No QR code found');
+    }
+  </script>
+</body>
+</html>

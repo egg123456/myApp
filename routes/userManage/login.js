@@ -1,5 +1,6 @@
 var DB = require('../../DB/dbConnect');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { secretKey, expires } = require('../../utils/token');
 
 const login = async (req, res) => {
   let params = req.body;
@@ -8,8 +9,7 @@ const login = async (req, res) => {
   if (rows && rows.length) {
     const { password, id, name, phone } = rows[0];
     if (password === params.password) {
-      const secretKey = 'egg'
-      const tokenStr = await jwt.sign({ phone, id, name }, secretKey, { expiresIn: '3600s' })
+      const tokenStr = await jwt.sign({ phone, id, name }, secretKey, { expiresIn: expires })
       res.json({
         status: 200,
         message: '登录成功！',

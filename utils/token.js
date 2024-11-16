@@ -10,4 +10,6 @@ module.exports = {
     }
     return tokenInfo || {};
   },
+  secretKey,
+  expires: 2 * 60 * 60 + 's',
 };

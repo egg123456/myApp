@@ -10,7 +10,12 @@ const { getCeremonyBooks, getCeremonyBookDetail, getCeremonyRecord, addCeremonyB
 const { addCeremonyRecord, editCeremonyRecord, deleteCeremonyRecord, getCeremonyRecordDetail } = require('./ceremonyManage/ceremonyRecord');
 const OCR = require('./OCR');
 const { getFestivalInfoList, editFestivalInfo, addFestivalInfo, deleteFestivalInfo, getFestivalInfoDetailById } = require('./festivalInfoManage');
+const { addAlgorithm, getAlgorithmList, editAlgorithm, deleteAlgorithm } = require('./algorithm');
+const { createDatabaseTable, deleteDatabaseTable } = require('./databaseTable');
+const { addInvoiceInfo, getInvoiceInfoList, editInvoiceInfo, deleteInvoiceInfo } = require('./invoiceManage');
 
+router.post('/api/createDataTable', createDatabaseTable);
+router.post('/api/deleteDataTable', deleteDatabaseTable);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -62,6 +67,18 @@ router.post('/api/festivalInfo/edit', editFestivalInfo);
 router.post('/api/festivalInfo/add', addFestivalInfo);
 router.post('/api/festivalInfo/delete', deleteFestivalInfo);
 router.get('/api/festivalInfo/detailById', getFestivalInfoDetailById);
+
+
+
+router.post('/api/algorithm/add', addAlgorithm);
+router.get('/api/algorithm/getList', getAlgorithmList);
+router.post('/api/algorithm/edit', editAlgorithm);
+router.post('/api/algorithm/delete', deleteAlgorithm);
+
+router.post('/api/invoiceInfo/add', addInvoiceInfo);
+router.get('/api/invoiceInfo/List', getInvoiceInfoList);
+router.post('/api/invoiceInfo/edit', editInvoiceInfo);
+router.post('/api/invoiceInfo/delete', deleteInvoiceInfo);
 
 
 router.post('/build/api/upload', multer({

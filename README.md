@@ -90,4 +90,17 @@ type | holiday
 name | festival name
 remark | varchar 255
 
+--------
+## algorithm
+field | desc
+------|-------
+id | auto increment key
+titleDesc | string
+inputDesc | string
+outputDesc | string
+useCase | json string
+titleAnalysis | string
+code
+
+
 
