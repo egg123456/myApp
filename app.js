@@ -8,10 +8,6 @@ var logger = require('morgan');
 const jwt = require('jsonwebtoken')
 const expressJWT = require('express-jwt')
 
-// 02：定义 secret 密钥，建议将密钥命名为 secretKey
-const secretKey = 'egg'
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var otherRouter = require('./routes/other');
@@ -23,7 +19,8 @@ var app = express();
 // app.use(cors());
 
 // 解析 post 表单数据的中间件
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { secretKey } = require('./utils/token');
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // 04：注册将 JWT 字符串解析还原成 JSON 对象的中间件

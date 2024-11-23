@@ -12,4 +12,5 @@ module.exports = {
   },
   secretKey,
   expires: 2 * 60 * 60 + 's',
+  // expires: 60 + 's',
 };
